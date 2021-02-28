@@ -16,9 +16,7 @@ import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
 import net.md_5.bungee.event.EventHandler;
-import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.RegisteredServiceProvider;
 
 import java.nio.file.*;
 import java.io.*;
@@ -43,7 +41,6 @@ public class Main extends Plugin implements Listener
     public static String incomingPermissionsChannel;
     public static String outgoingPremiumChannel;
     public static Configuration configuration;
-    private static Chat chat;
 
 
     static {
@@ -67,7 +64,6 @@ public class Main extends Plugin implements Listener
         BotBoth.load(this.getDataFolder());
         registerCooldowns();
         this.setupBoth();
-        initVault();
         this.clearBots();
         new AntiBotEvent(this);
         new PlayerEvent(this);
@@ -313,12 +309,6 @@ public class Main extends Plugin implements Listener
         Cooldowns.createCooldown("broadcast_cooldown");
     }
 
-    private void initVault() {
-        RegisteredServiceProvider<Chat> chatProvider = Bukkit.getServer().getServicesManager().getRegistration(Chat.class);
-        if (chatProvider != null)
-            chat = (Chat)chatProvider.getProvider();
-    }
-    public Chat getChat() {
-        return chat;
-    }
+
+
 }
