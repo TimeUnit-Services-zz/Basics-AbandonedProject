@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.lazze</groupId>
+    <artifactId>LazzeBasics</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>net.md-5</groupId>
+            <artifactId>bungeecord-parent</artifactId>
+            <version>1.8-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/BungeeCord.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spigot</groupId>
+            <artifactId>Spigot</artifactId>
+            <version>1.7.10-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/spigot-1.7.10-SNAPSHOT-b1657.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>net.luckperms.api</groupId>
+            <artifactId>Luckperms-Api</artifactId>
+            <version>Bungee</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/lib/LuckPerms-Bungee-5.1.32.jar</systemPath>
+        </dependency>
+
+    </dependencies>
+
+</project>

@@ -1,0 +1,71 @@
+# ~ License Configuration
+LICENSE-KEY: 'PUT-YOUR-LICENSE'
+
+# ~ Permission's Configuration
+permission:
+   staff: 'basics.staff'
+   op: 'basics.op'
+   user: 'basics.user'
+
+# ~ Messages Configuration
+disabled-staffchat-in:
+- '&cit has been deactivated staff-chat'
+disabled-highstaffchat-in:
+- '&cit has been deactivated highstaffchat'
+disabled-donorchat-in:
+- '&cit has been deactivated donorchat'
+staffchat:
+  message: '&9[Staff Chat] &7(%server%) &b%player%&7: &f%message%'
+donorchat:
+  message: '&9[Donor Chat] &7(%server%) &f%player%&7: %message%'
+highstaffchat:
+  message: '&9[High Staff] &7(%server%) %rank%%player%&7: %message%'
+report:
+  message: "&c[Report] &7(%server-target%) &f%player% &7reported player name &f%target%. &cReason&7: &f%message%"
+request:
+  message: "&a[Request] &7(%server%) &f%player% &7requested staff help. &aReason&7: &f%message%"
+staff-join:
+  message: '&7[Staff] &9%player% &fjoined &d%server%&f.'
+staff-leave:
+  message: '&7[Staff] &9%player% &fleft.'
+
+# ~ HubCommand Configuration
+hub:
+  server-name: 'Hub'
+
+# ~ MantinaceCommand Configuration
+maintenance:
+  whitelisted: false
+  ping-message: '&4Maintenance'
+  kick-message: '&cOur network is under in maintenance{nl}&cFollow us on twitter for more information @LazzeDevelopment'
+
+# ~ Booleans Configuration
+booleans:
+  MaintenanceCommand: true
+  StaffChatCommand: true
+  DonorChatCommand: true
+  SilentCommand: true
+  ConnectCommand: true
+  HighStaffChatCommand: true
+  ReportCommand: true
+  RequestCommand: true
+
+# ~ MOTD Configuration
+
+#date must be in this format "MM/dd/yy HH:mm:ss". The hour must be on a 24h clock. So if you wanted to do 5 PM,
+#you would put hour 17.
+date: '01/19/21 16:00:00'
+#Use this list: https://publib.boulder.ibm.com/tividd/td/TWS/SC32-1274-02/en_US/HTML/SRF_mst273.htm
+timezone: 'ARG'
+#Use %newline to start a second line. Use %time for the time.
+motd: '&6&lLazze &7| &fService.%newline &7&l%arroww% &eFollow us on Twitter using @LazzeService'
+#This string will be displayed when the time hits 0
+time-value-end: '&aStarted'
+#set max slots
+slots: 1000
+#command to be run when the countdown ends
+command-finish: 'whitelist off'
+#change type of clock, either 1 or 2 accepted.
+#1 is word format: 1 day, 2 hours, 30 minutes
+#2 is digital clock format: d:h:m:s
+clock-type: 1
