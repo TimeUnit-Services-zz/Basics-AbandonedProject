@@ -28,7 +28,7 @@ public class AntiBotEvent extends Event implements Listener
         AntiBotEvent.ignore = new ArrayList<ProxiedPlayer>();
     }
     
-    public AntiBotEvent(final Main plugin) {
+    public AntiBotEvent(Main plugin) {
         super(plugin);
         AntiBotEvent.i = 0;
         AntiBotEvent.limit = 3;
@@ -40,25 +40,25 @@ public class AntiBotEvent extends Event implements Listener
     }
     
     @EventHandler
-    public void onProxyPing(final ProxyPingEvent event) {
-        final String ip = event.getConnection().getAddress().getAddress().getHostAddress();
+    public void onProxyPing(ProxyPingEvent event) {
+        String ip = event.getConnection().getAddress().getAddress().getHostAddress();
         if (!BotBoth.pings.contains(ip)) {
             BotBoth.pings.add(ip);
         }
     }
     
     @EventHandler(priority = -64)
-    public void onPreLogin(final PreLoginEvent event) {
+    public void onPreLogin(PreLoginEvent event) {
         if (BotBoth.joins > AntiBotEvent.limit * AntiBotEvent.startup_multiplier) {
             int ping = 0;
             int nevv = 0;
             int length = 0;
             boolean pinging = false;
             boolean nevv2 = false;
-            final List<String> list = new ArrayList<String>();
+            List<String> list = new ArrayList<String>();
             String[] st;
             for (int x = (st = AntiBotEvent.st).length, i = 0; i < x; ++i) {
-                final String s = st[i];
+                String s = st[i];
                 if (s != null) {
                     if (Boolean.parseBoolean(s.split(" ")[0])) {
                         ++ping;
@@ -85,9 +85,9 @@ public class AntiBotEvent extends Event implements Listener
             BotBoth.attacks.add(new BotAttack(System.currentTimeMillis(), pinging, nevv2, type, length));
             BotBoth.joins = 0;
         }
-        final String name = event.getConnection().getName();
-        final String ip = event.getConnection().getAddress().getAddress().getHostAddress();
-        for (final BotAttack a : BotBoth.attacks) {
+        String name = event.getConnection().getName();
+        String ip = event.getConnection().getAddress().getAddress().getHostAddress();
+        for (BotAttack a : BotBoth.attacks) {
             if (!event.isCancelled() && a.handleLogin(true, name, ip)) {
                 event.setCancelled(true);
                 return;
@@ -98,7 +98,7 @@ public class AntiBotEvent extends Event implements Listener
         if (AntiBotEvent.i > AntiBotEvent.limit + 1) {
             AntiBotEvent.i = 0;
         }
-        final String s2 = String.valueOf(String.valueOf(String.valueOf(String.valueOf(BotBoth.pingedServer(ip))))) + " " + BotBoth.isNew(name) + " " + name;
+        String s2 = String.valueOf(String.valueOf(String.valueOf(String.valueOf(BotBoth.pingedServer(ip))))) + " " + BotBoth.isNew(name) + " " + name;
         AntiBotEvent.st[AntiBotEvent.i] = s2;
         if (BotBoth.isFakeNickname(name)) {
             event.setCancelled(true);
@@ -112,7 +112,7 @@ public class AntiBotEvent extends Event implements Listener
                     Thread.sleep(1000L);
                 }
                 catch (InterruptedException ex) {}
-                for (final BotAttack a : BotBoth.attacks) {
+                for (BotAttack a : BotBoth.attacks) {
                     if (a.handleLogin(false, name, ip)) {
                         event.setCancelled(true);
                         event.completeIntent((Plugin) Main.getInstance());
@@ -126,7 +126,7 @@ public class AntiBotEvent extends Event implements Listener
     }
     
     @EventHandler
-    public void onPostLogin(final PostLoginEvent event) {
+    public void onPostLogin(PostLoginEvent event) {
         Main.getInstance().getProxy().getScheduler().runAsync((Plugin) Main.getInstance(), (Runnable)new Runnable() {
             @Override
             public void run() {

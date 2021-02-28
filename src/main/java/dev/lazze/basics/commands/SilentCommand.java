@@ -14,12 +14,12 @@ public class SilentCommand extends Command
         super("silent", Main.configuration.getString("permission.staff"), new String[] { "filter" });
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage((BaseComponent)new TextComponent(Color.translate("&cPlayer use only!")));
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer)sender;
         if (SilentEvent.silent.contains(player.getUniqueId())) {
             SilentEvent.silent.remove(player.getUniqueId());
             player.sendMessage((BaseComponent)new TextComponent(Color.translate("&cYou have Disabled silent mode.")));

@@ -13,7 +13,7 @@ public class RequestEvent extends Event implements Listener
         RequestEvent.requestCooldowns = new HashMap<UUID, Long>();
     }
     
-    public RequestEvent(final Main plugin) {
+    public RequestEvent(Main plugin) {
         super(plugin);
     }
     
@@ -21,15 +21,15 @@ public class RequestEvent extends Event implements Listener
         RequestEvent.requestCooldowns.clear();
     }
     
-    public static void applyCooldown(final ProxiedPlayer player) {
+    public static void applyCooldown(ProxiedPlayer player) {
         RequestEvent.requestCooldowns.put(player.getUniqueId(), System.currentTimeMillis() + 180000L);
     }
     
-    public static boolean isActive(final ProxiedPlayer player) {
+    public static boolean isActive(ProxiedPlayer player) {
         return RequestEvent.requestCooldowns.containsKey(player.getUniqueId()) && System.currentTimeMillis() < RequestEvent.requestCooldowns.get(player.getUniqueId());
     }
     
-    public static long getMillisecondsLeft(final ProxiedPlayer player) {
+    public static long getMillisecondsLeft(ProxiedPlayer player) {
         if (RequestEvent.requestCooldowns.containsKey(player.getUniqueId())) {
             return Math.max(RequestEvent.requestCooldowns.get(player.getUniqueId()) - System.currentTimeMillis(), 0L);
         }

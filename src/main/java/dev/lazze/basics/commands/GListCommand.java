@@ -10,7 +10,7 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class GListCommand extends Command {
-  private final Main plugin;
+  private Main plugin;
   
   public GListCommand(Main base) {
     super("globallist", null, new String[] { "glist" });

@@ -6,7 +6,7 @@ public class Event
 {
     private Main plugin;
     
-    public Event(final Main plugin) {
+    public Event(Main plugin) {
         this.plugin = plugin;
     }
     

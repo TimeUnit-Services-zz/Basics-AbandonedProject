@@ -8,26 +8,26 @@ import net.md_5.bungee.api.config.*;
 
 public class ConnectCommand extends Command
 {
-    private final Main plugin;
+    private Main plugin;
     
-    public ConnectCommand(final Main base) {
+    public ConnectCommand(Main base) {
         super("connect", (String)null, new String[] {});
         this.plugin = base;
         this.plugin.getProxy().getPluginManager().registerCommand((Plugin)this.plugin, (Command)this);
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(ChatColor.RED + "You must be player to execute this command.");
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer)sender;
         if (args.length < 1) {
             player.sendMessage(ChatColor.GRAY + "You're currently connected on " + ChatColor.WHITE + ChatColor.BOLD + player.getServer().getInfo().getName());
             player.sendMessage(ChatColor.RED + "Usage: /join <server>");
         }
         else {
-            final ServerInfo server = ProxyServer.getInstance().getServerInfo(args[0]);
+            ServerInfo server = ProxyServer.getInstance().getServerInfo(args[0]);
             if (server == null) {
                 player.sendMessage(ChatColor.RED + "Server '" + args[0] + "' doesn't exists.");
                 return;

@@ -12,7 +12,7 @@ public class BotAttack
     private int legit;
     private long name;
     
-    public BotAttack(final long name, final boolean pinging, final boolean nevv, final String nicktype, final int length) {
+    public BotAttack(long name, boolean pinging, boolean nevv, String nicktype, int length) {
         this.length = 0;
         this.bots = 0;
         this.legit = 0;
@@ -21,7 +21,7 @@ public class BotAttack
         this.nicktype = nicktype;
         this.name = name;
         this.length = length;
-        final ExecutorService exe = Executors.newCachedThreadPool();
+        ExecutorService exe = Executors.newCachedThreadPool();
         exe.submit(new Runnable() {
             @Override
             public void run() {
@@ -31,7 +31,7 @@ public class BotAttack
                     }
                     catch (InterruptedException ex) {}
                     if (BotAttack.this.bots == 0) {
-                        final BotAttack this$0 = BotAttack.this;
+                        BotAttack this$0 = BotAttack.this;
                         BotAttack.access1(this$0, this$0.legit + 1);
                         if (BotAttack.this.legit > BotBoth.timeout) {
                             break;
@@ -48,7 +48,7 @@ public class BotAttack
         });
     }
     
-    private String getNickType(final String name) {
+    private String getNickType(String name) {
         if (name.length() == this.length) {
             return "length";
         }
@@ -62,7 +62,7 @@ public class BotAttack
         return this.name;
     }
     
-    public boolean handleLogin(final boolean b, final String name, final String IP) {
+    public boolean handleLogin(boolean b, String name, String IP) {
         if (this.pinging) {
             if (this.nevv == BotBoth.isNew(name) && this.nicktype.equals(this.getNickType(name))) {
                 if (b) {
@@ -82,11 +82,11 @@ public class BotAttack
         return false;
     }
     
-    public static void access1(final BotAttack attack, final int legit) {
+    public static void access1(BotAttack attack, int legit) {
         attack.legit = legit;
     }
     
-    public static void access2(final BotAttack attack, final int bots) {
+    public static void access2(BotAttack attack, int bots) {
         attack.bots = bots;
     }
 }

@@ -5,16 +5,16 @@ import dev.lazze.basics.utils.Color;
 import net.md_5.bungee.api.plugin.*;
 import net.md_5.bungee.api.*;
 
-public final class MaintenanceCommand extends Command
+public class MaintenanceCommand extends Command
 {
-    private final Main plugin;
+    private Main plugin;
     
-    public MaintenanceCommand(final Main plugin) {
+    public MaintenanceCommand(Main plugin) {
         super("maintenance", Main.configuration.getString("maintenance.permission"), new String[] { "globalwl", "globalwhitelist" });
         this.plugin = plugin;
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!sender.hasPermission(Main.configuration.getString("maintenance.permission"))) {
             sender.sendMessage(ChatColor.RED + "No Permissions.");
             return;

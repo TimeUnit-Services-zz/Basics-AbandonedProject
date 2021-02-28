@@ -35,7 +35,7 @@ public class PlayerEvent extends Event implements Listener
         PlayerEvent.bridge = new ArrayList<UUID>();
     }
     
-    public PlayerEvent(final Main plugin) {
+    public PlayerEvent(Main plugin) {
         super(plugin);
         this.resetSpam();
         this.resetFully();
@@ -43,8 +43,8 @@ public class PlayerEvent extends Event implements Listener
     }
     
     @EventHandler(priority = -64)
-    public void onLog(final PreLoginEvent event) {
-        final String name = event.getConnection().getName();
+    public void onLog(PreLoginEvent event) {
+        String name = event.getConnection().getName();
         if (PlayerEvent.edo && name.length() >= PlayerEvent.blockLengh) {
             event.setCancelled(true);
             ++PlayerEvent.blocked;
@@ -93,12 +93,12 @@ public class PlayerEvent extends Event implements Listener
     }
     
     @EventHandler
-    public void onPlayerJoin(final ServerSwitchEvent event) {
-        final ProxiedPlayer player = event.getPlayer();
+    public void onPlayerJoin(ServerSwitchEvent event) {
+        ProxiedPlayer player = event.getPlayer();
         if (!player.hasPermission("basics.staff")) {
             return;
         }
-        final ServerInfo server = player.getServer().getInfo();
+        ServerInfo server = player.getServer().getInfo();
         if (server.getName().equalsIgnoreCase("UHC-1") || server.getName().equalsIgnoreCase("UHC-2")) {
             player.connect(server);
         }
@@ -106,8 +106,8 @@ public class PlayerEvent extends Event implements Listener
     }
     
     @EventHandler
-    public void onPlayerDisconnect(final PlayerDisconnectEvent event) {
-        final ProxiedPlayer player = event.getPlayer();
+    public void onPlayerDisconnect(PlayerDisconnectEvent event) {
+        ProxiedPlayer player = event.getPlayer();
         if (!player.hasPermission("basics.staff")) {
             return;
         }
@@ -115,13 +115,13 @@ public class PlayerEvent extends Event implements Listener
     }
     
     @EventHandler
-    public void onChat(final ChatEvent event) {
+    public void onChat(ChatEvent event) {
         if (!(event.getSender() instanceof ProxiedPlayer)) {
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)event.getSender();
-        final ServerInfo server = player.getServer().getInfo();
-        final String message = event.getMessage().toLowerCase();
+        ProxiedPlayer player = (ProxiedPlayer)event.getSender();
+        ServerInfo server = player.getServer().getInfo();
+        String message = event.getMessage().toLowerCase();
         if (server.getName().equalsIgnoreCase("Hub") && (event.getMessage().equalsIgnoreCase("/HCF") || event.getMessage().equalsIgnoreCase("/kits") || event.getMessage().equalsIgnoreCase("/uhc"))) {
             event.setCancelled(true);
             player.sendMessage(Color.translate("&cPlease connect to that server trough hub! To go to the hub use /hub or /lobby"));

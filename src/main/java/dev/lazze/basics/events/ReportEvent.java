@@ -13,7 +13,7 @@ public class ReportEvent extends Event implements Listener
         ReportEvent.reportCooldowns = new HashMap<UUID, Long>();
     }
     
-    public ReportEvent(final Main plugin) {
+    public ReportEvent(Main plugin) {
         super(plugin);
     }
     
@@ -21,15 +21,15 @@ public class ReportEvent extends Event implements Listener
         ReportEvent.reportCooldowns.clear();
     }
     
-    public static void applyCooldown(final ProxiedPlayer player) {
+    public static void applyCooldown(ProxiedPlayer player) {
         ReportEvent.reportCooldowns.put(player.getUniqueId(), System.currentTimeMillis() + 180000L);
     }
     
-    public static boolean isActive(final ProxiedPlayer player) {
+    public static boolean isActive(ProxiedPlayer player) {
         return ReportEvent.reportCooldowns.containsKey(player.getUniqueId()) && System.currentTimeMillis() < ReportEvent.reportCooldowns.get(player.getUniqueId());
     }
     
-    public static long getMillisecondsLeft(final ProxiedPlayer player) {
+    public static long getMillisecondsLeft(ProxiedPlayer player) {
         if (ReportEvent.reportCooldowns.containsKey(player.getUniqueId())) {
             return Math.max(ReportEvent.reportCooldowns.get(player.getUniqueId()) - System.currentTimeMillis(), 0L);
         }

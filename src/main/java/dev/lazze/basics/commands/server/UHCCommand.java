@@ -9,21 +9,21 @@ import net.md_5.bungee.api.config.*;
 
 public class UHCCommand extends Command
 {
-    private final Main plugin;
+    private Main plugin;
     
-    public UHCCommand(final Main base) {
+    public UHCCommand(Main base) {
         super("uhc", (String)null, new String[0]);
         this.plugin = base;
         this.plugin.getProxy().getPluginManager().registerCommand((Plugin)this.plugin, (Command)this);
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(ChatColor.RED + "You must be player to execute this command.");
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
-        final ServerInfo server = ProxyServer.getInstance().getServerInfo("UHC");
+        ProxiedPlayer player = (ProxiedPlayer)sender;
+        ServerInfo server = ProxyServer.getInstance().getServerInfo("UHC");
         player.sendMessage(Color.translate("&dSending to &fUHC&d."));
         player.connect(server);
     }

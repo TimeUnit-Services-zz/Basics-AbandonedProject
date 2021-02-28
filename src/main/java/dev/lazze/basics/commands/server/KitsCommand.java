@@ -9,21 +9,21 @@ import net.md_5.bungee.api.config.*;
 
 public class KitsCommand extends Command
 {
-    private final Main plugin;
+    private Main plugin;
     
-    public KitsCommand(final Main base) {
+    public KitsCommand(Main base) {
         super("kits", (String)null, new String[] { "kitshcf" });
         this.plugin = base;
         this.plugin.getProxy().getPluginManager().registerCommand((Plugin)this.plugin, (Command)this);
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(ChatColor.RED + "You must be player to execute this command.");
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
-        final ServerInfo server = ProxyServer.getInstance().getServerInfo("Kits");
+        ProxiedPlayer player = (ProxiedPlayer)sender;
+        ServerInfo server = ProxyServer.getInstance().getServerInfo("Kits");
         player.sendMessage(Color.translate("&dSending to &fKits&d."));
         player.connect(server);
     }

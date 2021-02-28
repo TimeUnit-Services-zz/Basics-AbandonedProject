@@ -13,22 +13,22 @@ public class HubCommand extends Command
         super("hub", "", new String[] { "lobby" });
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(Color.translate("&cPlayer use only!"));
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer)sender;
         if (player.hasPermission(Main.configuration.getString("hub.permission")) && player.getServer().getInfo().getName().equalsIgnoreCase(Main.configuration.getString("hub.server-name"))) {
             player.sendMessage(Color.translate("&cYou are already connected to the " + Main.configuration.getString("hub.server-name") + "!"));
             return;
         }
         if (!player.hasPermission(Main.configuration.getString("permission.user"))) {
-            final ServerInfo target = ProxyServer.getInstance().getServerInfo(Main.configuration.getString("hub.server-name"));
+            ServerInfo target = ProxyServer.getInstance().getServerInfo(Main.configuration.getString("hub.server-name"));
             player.connect(target);
         }
         else if (player.hasPermission(Main.configuration.getString("permission.user"))) {
-            final ServerInfo target = ProxyServer.getInstance().getServerInfo(Main.configuration.getString("hub.server-name"));
+            ServerInfo target = ProxyServer.getInstance().getServerInfo(Main.configuration.getString("hub.server-name"));
             player.connect(target);
         }
     }

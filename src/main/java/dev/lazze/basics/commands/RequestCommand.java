@@ -18,13 +18,13 @@ public class RequestCommand extends Command
         super("request", "", new String[] { "helpop", "staffhelp" });
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(Color.translate("&cPlayer use only!"));
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
-        final ServerInfo server = player.getServer().getInfo();
+        ProxiedPlayer player = (ProxiedPlayer)sender;
+        ServerInfo server = player.getServer().getInfo();
         if (player.getServer().getInfo().getName().equalsIgnoreCase(new StringBuilder().append(Main.configuration.getStringList("disabled-request-in")).toString())) {
             player.sendMessage(Color.translate("&cRequest is disabled on this server."));
             return;
@@ -37,7 +37,7 @@ public class RequestCommand extends Command
         }
         else {
             RequestEvent.applyCooldown(player);
-            final StringBuilder message = new StringBuilder();
+            StringBuilder message = new StringBuilder();
             for (int i = 0; i < args.length; ++i) {
                 message.append(args[i]).append(" ");
             }
@@ -88,9 +88,9 @@ public class RequestCommand extends Command
                 }
             }
             player.sendMessage(Color.translate("&aYour request request has been submitted, we will take maximum 3 minutes in answer it!"));
-            for (final ProxiedPlayer online : BungeeCord.getInstance().getPlayers()) {
+            for (ProxiedPlayer online : BungeeCord.getInstance().getPlayers()) {
                 if (!SilentEvent.silent.contains(online.getUniqueId()) && online.hasPermission(Main.configuration.getString("request.permission"))) {
-                    final ProxiedPlayer proxiedPlayer = online;
+                    ProxiedPlayer proxiedPlayer = online;
                     Main.getInstance();
                     proxiedPlayer.sendMessage(Color.translate(Main.configuration.getString("request.message").replace("%server%", player.getServer().getInfo().getName()).replace("%player%", player.getName()).replace("%message%", message).replace("{nl}", "\n")));
                 }

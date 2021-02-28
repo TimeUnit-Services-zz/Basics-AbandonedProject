@@ -18,30 +18,30 @@ public class StaffChatEvent extends Event implements Listener
         StaffChatEvent.staff = new ArrayList<UUID>();
     }
     
-    public StaffChatEvent(final Main plugin) {
+    public StaffChatEvent(Main plugin) {
         super(plugin);
         ProxyServer.getInstance().getPluginManager().registerListener((Plugin)plugin, (Listener)this);
     }
     
     @EventHandler
-    public void onPlayerDisconnect(final PlayerDisconnectEvent event) {
-        final ProxiedPlayer player = event.getPlayer();
+    public void onPlayerDisconnect(PlayerDisconnectEvent event) {
+        ProxiedPlayer player = event.getPlayer();
         if (StaffChatEvent.staff.contains(player.getUniqueId())) {
             StaffChatEvent.staff.remove(player.getUniqueId());
         }
     }
     
     @EventHandler
-    public void onChat(final ChatEvent event) {
+    public void onChat(ChatEvent event) {
         if (event.getSender() instanceof ProxiedPlayer) {
-            final ProxiedPlayer player = (ProxiedPlayer)event.getSender();
-            final ServerInfo server = player.getServer().getInfo();
+            ProxiedPlayer player = (ProxiedPlayer)event.getSender();
+            ServerInfo server = player.getServer().getInfo();
             if (event.getMessage().startsWith("/")) {
                 return;
             }
             if (StaffChatEvent.staff.contains(player.getUniqueId())) {
                 if (player.hasPermission(Main.configuration.getString("permission.staff"))) {
-                    for (final ProxiedPlayer online : ProxyServer.getInstance().getPlayers()) {
+                    for (ProxiedPlayer online : ProxyServer.getInstance().getPlayers()) {
                         if (online.hasPermission(Main.configuration.getString("permission.staff")) && !SilentEvent.silent.contains(online.getUniqueId())) {
                             online.sendMessage(Color.translate(Main.configuration.getString("staffchat.message").replace("%player%", player.getName()).replace("%message%", event.getMessage()).replace("%server%", player.getServer().getInfo().getName())));
                             event.setCancelled(true);

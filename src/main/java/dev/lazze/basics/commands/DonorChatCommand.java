@@ -15,12 +15,12 @@ public class DonorChatCommand extends Command
         super("donorchat", Main.configuration.getString("permission.staff"), new String[] { "donorsc", "donatorchat", "dc", "dsc" });
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(Color.translate("&cPlayer use only!"));
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer)sender;
         if (!player.hasPermission(Main.configuration.getString("permission.staff"))) {
             player.sendMessage(Color.translate("&cNo Permissions."));
             return;

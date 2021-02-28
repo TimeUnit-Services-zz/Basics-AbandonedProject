@@ -17,20 +17,20 @@ import net.md_5.bungee.api.plugin.Plugin;
 
 public class BroadcastCommand extends Command
 {
-    private final Main plugin;
+    private Main plugin;
     
-    public BroadcastCommand(final Main base) {
+    public BroadcastCommand(Main base) {
         super("broadcast", "permission.op", new String[0]);
         this.plugin = base;
         this.plugin.getProxy().getPluginManager().registerCommand((Plugin)this.plugin, (Command)this);
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof ProxiedPlayer)) {
             sender.sendMessage(ChatColor.RED + "You must be player to execute this command.");
             return;
         }
-        final ProxiedPlayer player = (ProxiedPlayer)sender;
+        ProxiedPlayer player = (ProxiedPlayer)sender;
         if (!player.getServer().getInfo().getName().contains("Kits")) {
             player.sendMessage(ChatColor.RED + "You must be on Kits server to use this command.");
             return;
@@ -39,8 +39,8 @@ public class BroadcastCommand extends Command
             player.sendMessage(ChatColor.RED + "You can use this command only every 6 hours.");
             return;
         }
-        for (final ProxiedPlayer online : this.plugin.getProxy().getPlayers()) {
-            final TextComponent message = new TextComponent("(Click here to join)");
+        for (ProxiedPlayer online : this.plugin.getProxy().getPlayers()) {
+            TextComponent message = new TextComponent("(Click here to join)");
             message.setColor(ChatColor.GRAY);
             message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/play " + player.getServer().getInfo().getName()));
             message.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("Click here to join to the Game").create()));

@@ -5,14 +5,14 @@ import net.md_5.bungee.api.connection.*;
 
 public class Message
 {
-    public static void sendMessage(final String message) {
-        for (final ProxiedPlayer online : BungeeCord.getInstance().getPlayers()) {
+    public static void sendMessage(String message) {
+        for (ProxiedPlayer online : BungeeCord.getInstance().getPlayers()) {
             online.sendMessage(Color.translate(message));
         }
     }
     
-    public static void sendMessage(final String message, final String permission) {
-        for (final ProxiedPlayer online : BungeeCord.getInstance().getPlayers()) {
+    public static void sendMessage(String message, String permission) {
+        for (ProxiedPlayer online : BungeeCord.getInstance().getPlayers()) {
             if (online.hasPermission(permission)) {
                 online.sendMessage(Color.translate(message));
             }

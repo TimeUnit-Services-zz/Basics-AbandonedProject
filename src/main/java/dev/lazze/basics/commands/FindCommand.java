@@ -9,7 +9,7 @@ import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
 
 public class FindCommand extends Command {
-  private final Main plugin;
+  private Main plugin;
   
   public FindCommand(Main base) {
     super("find", null, new String[] { "search" });

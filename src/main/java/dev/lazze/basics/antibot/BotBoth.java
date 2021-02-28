@@ -34,7 +34,7 @@ public class BotBoth
             name = name.substring(starts(name).length());
             if (starts(name) != null) {
                 name = name.substring(starts(name).length());
-                for (final String s : BotBoth.ends) {
+                for (String s : BotBoth.ends) {
                     if (name.equals(s)) {
                         return true;
                     }
@@ -44,8 +44,8 @@ public class BotBoth
         return false;
     }
     
-    private static String starts(final String what) {
-        for (final String s : BotBoth.starts) {
+    private static String starts(String what) {
+        for (String s : BotBoth.starts) {
             if (what.startsWith(s)) {
                 return s;
             }
@@ -54,7 +54,7 @@ public class BotBoth
     }
     
     public static String getTime() {
-        final LocalTime lt = LocalTime.now();
+        LocalTime lt = LocalTime.now();
         String h;
         if (lt.getHour() < 10) {
             h = "0" + lt.getHour();
@@ -76,14 +76,14 @@ public class BotBoth
         else {
             s = new StringBuilder(String.valueOf(lt.getSecond())).toString();
         }
-        final String t = String.valueOf(String.valueOf(String.valueOf(String.valueOf(h)))) + ":" + m + ":" + s;
+        String t = String.valueOf(String.valueOf(String.valueOf(String.valueOf(h)))) + ":" + m + ":" + s;
         return t;
     }
     
-    public static void log(final String name, final String IP) {
+    public static void log(String name, String IP) {
         try {
-            final BufferedWriter buf = new BufferedWriter(new FileWriter(BotBoth.Log, true));
-            final LocalDate date = LocalDate.now();
+            BufferedWriter buf = new BufferedWriter(new FileWriter(BotBoth.Log, true));
+            LocalDate date = LocalDate.now();
             buf.write(String.valueOf(String.valueOf(String.valueOf(String.valueOf(date.getDayOfMonth())))) + "." + date.getMonth() + "." + date.getYear() + " " + getTime() + " - " + name + " - " + IP);
             buf.write(System.getProperty("line.separator"));
             buf.close();
@@ -91,7 +91,7 @@ public class BotBoth
         catch (Exception ex) {}
     }
     
-    public static void load(final File file) {
+    public static void load(File file) {
         file.mkdirs();
         BotBoth.f = new File(file, "players.yml");
         BotBoth.Log = new File(file, "Connections.log");
@@ -109,18 +109,18 @@ public class BotBoth
             catch (Exception ex2) {}
         }
         try {
-            final URL website = new URL("http://craftplex.eu/download/nicks.txt");
-            final ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            final FileOutputStream fos = new FileOutputStream("plugins/AntiBot/nicks.txt");
+            URL website = new URL("http://craftplex.eu/download/nicks.txt");
+            ReadableByteChannel rbc = Channels.newChannel(website.openStream());
+            FileOutputStream fos = new FileOutputStream("plugins/AntiBot/nicks.txt");
             fos.getChannel().transferFrom(rbc, 0L, Long.MAX_VALUE);
             fos.close();
             rbc.close();
         }
         catch (Exception ex3) {}
         try {
-            final BufferedReader br = new BufferedReader(new FileReader(BotBoth.nickfile));
+            BufferedReader br = new BufferedReader(new FileReader(BotBoth.nickfile));
             while (true) {
-                final String line = br.readLine();
+                String line = br.readLine();
                 if (line == null || line.isEmpty()) {
                     break;
                 }
@@ -130,9 +130,9 @@ public class BotBoth
         }
         catch (Exception ex4) {}
         try {
-            final BufferedReader br = new BufferedReader(new FileReader(BotBoth.f));
+            BufferedReader br = new BufferedReader(new FileReader(BotBoth.f));
             while (true) {
-                final String line = br.readLine();
+                String line = br.readLine();
                 if (line == null || line.isEmpty()) {
                     break;
                 }
@@ -172,10 +172,10 @@ public class BotBoth
         BotBoth.ends.add("YT");
     }
     
-    public static int getLength(final List<String> list) {
+    public static int getLength(List<String> list) {
         for (int i = 1; i < 17; ++i) {
             int num = 0;
-            for (final String s : list) {
+            for (String s : list) {
                 if (s.length() == i) {
                     ++num;
                 }
@@ -187,9 +187,9 @@ public class BotBoth
         return 0;
     }
     
-    public static String getNickType(final List<String> list) {
+    public static String getNickType(List<String> list) {
         int nicks = 0;
-        for (final String s : list) {
+        for (String s : list) {
             if (getNickType(s).equals("nicks")) {
                 ++nicks;
             }
@@ -200,17 +200,17 @@ public class BotBoth
         return "null";
     }
     
-    public static String getNickType(final String name) {
+    public static String getNickType(String name) {
         if (BotBoth.nicks.contains(name)) {
             return "nicks";
         }
         return "null";
     }
     
-    public static void addPlayer(final String p) {
+    public static void addPlayer(String p) {
         if (!BotBoth.players.contains(p)) {
             try {
-                final BufferedWriter buf = new BufferedWriter(new FileWriter(BotBoth.f, true));
+                BufferedWriter buf = new BufferedWriter(new FileWriter(BotBoth.f, true));
                 buf.write(p);
                 buf.write(System.getProperty("line.separator"));
                 buf.close();
@@ -220,16 +220,16 @@ public class BotBoth
         }
     }
     
-    public static boolean isNew(final String p) {
+    public static boolean isNew(String p) {
         return BotBoth.players.contains(p);
     }
     
-    public static boolean pingedServer(final String ip) {
+    public static boolean pingedServer(String ip) {
         return BotBoth.pings.contains(ip);
     }
     
-    public static void cancelAttack(final long name) {
-        for (final BotAttack a : BotBoth.attacks) {
+    public static void cancelAttack(long name) {
+        for (BotAttack a : BotBoth.attacks) {
             if (a.getName() == name) {
                 BotBoth.attacks.remove(a);
             }

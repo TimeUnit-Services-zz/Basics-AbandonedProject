@@ -121,12 +121,12 @@ public class Main extends Plugin implements Listener
         if (!this.getDataFolder().exists()) {
             this.getDataFolder().mkdir();
         }
-        final File file = new File(this.getDataFolder(), "config.yml");
+        File file = new File(this.getDataFolder(), "config.yml");
         if (!file.exists()) {
             try {
                 Throwable t = null;
                 try {
-                    final InputStream in = this.getResourceAsStream("config.yml");
+                    InputStream in = this.getResourceAsStream("config.yml");
                     try {
                         Files.copy(in, file.toPath(), new CopyOption[0]);
                     }
@@ -141,20 +141,20 @@ public class Main extends Plugin implements Listener
                 }
                 finally {
                     if (t == null) {
-                        final Throwable t2 = t = null;
+                        Throwable t2 = t = null;
                     }
                     else {
-                        final Throwable t2 = null;
+                        Throwable t2 = null;
                         if (t != t2) {
                             t.addSuppressed(t2);
                         }
                     }
                 }
                 if (t == null) {
-                    final Throwable t2 = t = null;
+                    Throwable t2 = t = null;
                 }
                 else {
-                    final Throwable t2 = null;
+                    Throwable t2 = null;
                     if (t != t2) {
                         t.addSuppressed(t2);
                     }
@@ -201,17 +201,17 @@ public class Main extends Plugin implements Listener
     }
     Throwable t = null;
     @EventHandler
-    public void onPing(final ProxyPingEvent e) {
-        final ServerPing sp = e.getResponse();
-        final String message = Main.configuration.getString("motd").replaceAll("%time", this.getTime()).replaceAll("%newline", "\n").replace("%heart%", "�?�").replace("%star%", "★").replace("%crown%", "♕").replace("%sad%", "☹").replace("%bigarrow%", "➤").replace("%airplane%", "✈").replace("%arrowlittle%", "▸").replace("%yesv%", "✓").replace("%nov%", "✘").replace("%star2%", "✦").replace("%idk%", "?").replace("%right%", "☞").replace("%death%", "☠").replace("%church%", "✞").replace("|", "\u2503").replace("%arroww%", "➥");
+    public void onPing(ProxyPingEvent e) {
+        ServerPing sp = e.getResponse();
+        String message = Main.configuration.getString("motd").replaceAll("%time", this.getTime()).replaceAll("%newline", "\n").replace("%heart%", "�?�").replace("%star%", "★").replace("%crown%", "♕").replace("%sad%", "☹").replace("%bigarrow%", "➤").replace("%airplane%", "✈").replace("%arrowlittle%", "▸").replace("%yesv%", "✓").replace("%nov%", "✘").replace("%star2%", "✦").replace("%idk%", "?").replace("%right%", "☞").replace("%death%", "☠").replace("%church%", "✞").replace("|", "\u2503").replace("%arroww%", "➥");
         sp.getPlayers().setMax(Main.configuration.getInt("slots"));
         sp.setDescription(t(message));
         e.setResponse(sp);
     }
     public String getTime() {
-        final Configuration config = Main.configuration;
-        final String dateStop = config.getString("date");
-        final SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+        Configuration config = Main.configuration;
+        String dateStop = config.getString("date");
+        SimpleDateFormat format = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
         Date date = null;
         try {
             format.setTimeZone(TimeZone.getTimeZone(config.getString("timezone")));
@@ -220,20 +220,20 @@ public class Main extends Plugin implements Listener
         catch (java.text.ParseException e) {
             e.printStackTrace();
         }
-        final Date current = new Date();
-        final long diff = date.getTime() - current.getTime();
+        Date current = new Date();
+        long diff = date.getTime() - current.getTime();
         if (diff < 0L) {
             return config.getString(t("time-value-end"));
         }
         if (config.getInt("clock-type") == 1) {
-            final long days = TimeUnit.MILLISECONDS.toDays(diff);
-            final long hours = TimeUnit.MILLISECONDS.toHours(diff);
-            final long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
-            final long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
-            final long rhours = (days == 0L) ? hours : (hours % (days * 24L));
-            final long rminutes = (hours == 0L) ? minutes : (minutes % (hours * 60L));
-            final long rseconds = (minutes == 0L) ? seconds : (seconds % (minutes * 60L));
-            final StringBuilder sb = new StringBuilder();
+            long days = TimeUnit.MILLISECONDS.toDays(diff);
+            long hours = TimeUnit.MILLISECONDS.toHours(diff);
+            long minutes = TimeUnit.MILLISECONDS.toMinutes(diff);
+            long seconds = TimeUnit.MILLISECONDS.toSeconds(diff);
+            long rhours = (days == 0L) ? hours : (hours % (days * 24L));
+            long rminutes = (hours == 0L) ? minutes : (minutes % (hours * 60L));
+            long rseconds = (minutes == 0L) ? seconds : (seconds % (minutes * 60L));
+            StringBuilder sb = new StringBuilder();
             if (days > 1L) {
                 sb.append(String.valueOf(days) + "d");
             }
@@ -261,13 +261,13 @@ public class Main extends Plugin implements Listener
             return sb.toString();
         }
         if (config.getInt("clock-type") == 2) {
-            final long seconds2 = TimeUnit.MILLISECONDS.toSeconds(diff);
-            final long minutes2 = TimeUnit.MILLISECONDS.toMinutes(diff);
-            final long hours2 = TimeUnit.MILLISECONDS.toHours(diff);
-            final long days2 = TimeUnit.MILLISECONDS.toDays(diff);
-            final long rhours = (days2 == 0L) ? hours2 : (hours2 % (days2 * 24L));
-            final long rminutes = (hours2 == 0L) ? minutes2 : (minutes2 % (hours2 * 60L));
-            final long rseconds = (minutes2 == 0L) ? seconds2 : (seconds2 % (minutes2 * 60L));
+            long seconds2 = TimeUnit.MILLISECONDS.toSeconds(diff);
+            long minutes2 = TimeUnit.MILLISECONDS.toMinutes(diff);
+            long hours2 = TimeUnit.MILLISECONDS.toHours(diff);
+            long days2 = TimeUnit.MILLISECONDS.toDays(diff);
+            long rhours = (days2 == 0L) ? hours2 : (hours2 % (days2 * 24L));
+            long rminutes = (hours2 == 0L) ? minutes2 : (minutes2 % (hours2 * 60L));
+            long rseconds = (minutes2 == 0L) ? seconds2 : (seconds2 % (minutes2 * 60L));
             return String.valueOf(days2) + ":" + rhours + ":" + rminutes + ":" + rseconds;
         }
         return null;
@@ -302,7 +302,7 @@ public class Main extends Plugin implements Listener
     public static PluginManager getPluginManager() {
         return Main.pluginmanager;
     }
-    public static String t(final String i) {
+    public static String t(String i) {
         return ChatColor.translateAlternateColorCodes('&', i);
     }
     private void registerCooldowns() {

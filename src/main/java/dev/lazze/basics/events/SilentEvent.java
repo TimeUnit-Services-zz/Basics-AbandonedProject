@@ -14,7 +14,7 @@ public class SilentEvent extends Event implements Listener
         SilentEvent.silent = new ArrayList<UUID>();
     }
     
-    public SilentEvent(final Main plugin) {
+    public SilentEvent(Main plugin) {
         super(plugin);
     }
 }

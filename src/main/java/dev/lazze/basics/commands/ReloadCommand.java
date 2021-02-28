@@ -11,7 +11,7 @@ public class ReloadCommand extends Command
         super("configreload", Main.configuration.getString("permission.op"), new String[] { "creload", "reload" });
     }
     
-    public void execute(final CommandSender sender, final String[] args) {
+    public void execute(CommandSender sender, String[] args) {
         Main.getInstance().reloadConfig();
         sender.sendMessage(Color.translate("&aYou have reloaded the configuration file!"));
     }

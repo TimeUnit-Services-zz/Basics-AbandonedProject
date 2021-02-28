@@ -7,17 +7,17 @@ import net.md_5.bungee.api.event.*;
 import net.md_5.bungee.api.connection.*;
 import net.md_5.bungee.event.*;
 
-public final class MaintenanceEventB implements Listener
+public class MaintenanceEventB implements Listener
 {
-    private final Main plugin;
+    private Main plugin;
     
-    public MaintenanceEventB(final Main plugin) {
+    public MaintenanceEventB(Main plugin) {
         this.plugin = plugin;
     }
     
     @EventHandler
-    public void postLogin(final PostLoginEvent event) {
-        final ProxiedPlayer player = event.getPlayer();
+    public void postLogin(PostLoginEvent event) {
+        ProxiedPlayer player = event.getPlayer();
         if (Main.configuration.getBoolean("maintenance.whitelisted") && !player.hasPermission(Main.configuration.getString("permission.staff"))) {
             player.disconnect(Color.translate(Main.configuration.getString("maintenance.kick-message").replace("{nl}", "\n")));
         }
